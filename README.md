@@ -34,4 +34,3 @@ Run the following command to start the server
 ## License
 
 MIT License. [Click here for more information.](LICENSE.md)
-=======
