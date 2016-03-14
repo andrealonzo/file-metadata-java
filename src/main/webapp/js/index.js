@@ -20,7 +20,7 @@ function handleFormSubmit(e, files) {
     var data = new FormData();
     
     data.append("file", file);
-    $("#results").html("<img src='public/ajax-loader.gif'/>");
+    $("#results").html("<img src='ajax-loader.gif'/>");
     $.ajax({
         url: window.location.origin + '/fileanalyze/',
         type: 'POST',
@@ -47,7 +47,6 @@ function parseResults(results) {
     	console.log(results);
         resultText = '<p>'+results.filename + ' is ' + results.fileSize + ' bytes</p>';
         resultText += '<p>Mime type is ' + results.mimetype+'</p>' ;
-        resultText += '<p>Encoding is ' + results.encoding+'</p>';
     }
     var output = '	<div class="panel panel-default">' +
         '<div class="panel-body">' +
