@@ -16,13 +16,6 @@ Run the following command to build the project
 
 ## Run
 
-Create configuration file at
-
-	/src/main/resources/config.properties
-	
-You will see a sample configuration template in 
-
-	/src/main/resources/config.properties.sample
 
 Run the following command to start the server 
 
