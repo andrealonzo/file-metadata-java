@@ -44,7 +44,6 @@ function parseResults(results) {
         resultText = "There was an error";
     }
     else {
-    	console.log(results);
         resultText = '<p>'+results.filename + ' is ' + results.fileSize + ' bytes</p>';
         resultText += '<p>Mime type is ' + results.mimetype+'</p>' ;
     }
