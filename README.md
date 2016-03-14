@@ -1,10 +1,10 @@
-# Image Search Abstraction Layer JAVA implementation
+# File Metadata JAVA implementation
 
 ## Overview
 
-This is my JAVA implementation of the Image Search Abstraction Layer project for Free Code Camp.
+This is my JAVA implementation of the File Metadata project for Free Code Camp.
 
-A running version of this program can be found at https://image-search-java.herokuapp.com/
+A running version of this program can be found at https://filemetadata-java.herokuapp.com/
 
 ## Build
 
@@ -24,10 +24,6 @@ You will see a sample configuration template in
 
 	/src/main/resources/config.properties.sample
 
-Run the database creation script found in 
-
-    /scripts/db_creation.txt
-
 Run the following command to start the server 
 
     $ mvn jetty:run
@@ -40,9 +36,7 @@ Run the following command to start the server
 | Maven  
 | Jackson JSON parser
 | Jetty         
-| Servlets 
-| Postgres DB 
-| Bing Azure Search API
+| Servlets
 
 ## License
 

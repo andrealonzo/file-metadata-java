@@ -5,15 +5,11 @@
 	<groupId>com.aalonzo</groupId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>Image Search</name>
-	<url>http://maven.apache.org</url>
+	<name>File Metadata</name>
+	<url>https://filemetadata-java.herokuapp.com</url>
 	<properties>
 		<jdk.version>1.7</jdk.version>
-		<spring.version>4.1.1.RELEASE</spring.version>
-		<jstl.version>1.2</jstl.version>
 		<junit.version>4.11</junit.version>
-		<logback.version>1.0.13</logback.version>
-		<jcl-over-slf4j.version>1.7.5</jcl-over-slf4j.version>
 	</properties>
 
 	<dependencies>
@@ -33,7 +29,7 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -61,11 +57,6 @@
 			<version>1.5.0</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>9.4.1208</version>
-		</dependency>
 
 
 	</dependencies>
@@ -110,9 +101,10 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
+				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>8.1.4.v20120524</version>
+				<version>9.3.7.v20160115</version>
+
 				<configuration>
 					<scanIntervalSeconds>1</scanIntervalSeconds>
 
@@ -149,5 +141,5 @@
 		</plugins>
 
 	</build>
-	<artifactId>image-search</artifactId>
+	<artifactId>file-metadata</artifactId>
 </project>

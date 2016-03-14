@@ -1,85 +1,58 @@
 $(document).ready(function() {
 
-    $("#recentSearchesButton").click(function() {
-        handleSearchesButtonClick();
+    var files;
+    $('input[type=file]').on('change', function() {
+        files = event.target.files;
     });
-    $("#searchForm").submit(function(e) {
-        handleSearchFormSubmit(e);
+    $("#fileForm").submit(function(e) {
+        handleFormSubmit(e, files);
     });
 
 
 });
-var serverUrl = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
-function handleSearchFormSubmit(e) {
+
+function handleFormSubmit(e, files) {
     e.preventDefault();
-    var url = serverUrl + "/imagesearch/" + $("#query").val() + "?offset=" + $("#offset").val();
-    $.ajax({
-        method: "GET",
-        url: url,
-        dataType: "json",
-        success: function(data) {
-
-            $("#results")
-                .html(parseSearchResults(data));
-
-        }
-    });
-}
-
-function handleSearchesButtonClick() {
-    var url = serverUrl + "/latest/imagesearch/";
-    $.ajax({
-        method: "GET",
-        url: url,
-        dataType: "json",
-        success: function(data) {
-            $("#results")
-                .html(parseRecentSearchResults(data));
-
-        }
-    });
-}
-
-function parseSearchResults(results) {
-
-    var output = '<div class="panel panel-default">' +
-        '<div class="panel-body">';
-    for (var i = 0; i < results.length; i++) {
-        if (i % 4 === 0) {
-            //start new row
-            output += '<div class="row">';
-        }
-        output += '<div class="col-md-3">' +
-            '<a href="'+results[i].context+'" target="_blank" title="'+results[i].snippet+'">' +
-            '<img src="'+results[i].url+'" class="img-responsive img-thumbnail">' +
-            '</a> </div>';
-
-            if (i % 4 === 3) {
-                //end new row
-                output += '</div>';
-            }
+    if (!files) {
+        return;
     }
-    output += '</div>' +
+    var file = files[0];
+    var data = new FormData();
+    
+    data.append("file", file);
+    $("#results").html("<img src='public/ajax-loader.gif'/>");
+    $.ajax({
+        url: window.location.origin + '/fileanalyze/',
+        type: 'POST',
+        data: data,
+        cache: false,
+        processData: false,
+        contentType: false,
+        error: function(jqXHR, textStatus, errorThrown) {
+            $("#results").html("There was an error: " + textStatus);
+        },
+        success: function(data) {
+            $("#results").html(parseResults(JSON.parse(data)));
+        }.bind(file)
+    });
+
+}
+
+function parseResults(results) {
+    var resultText;
+    if (!results) {
+        resultText = "There was an error";
+    }
+    else {
+    	console.log(results);
+        resultText = '<p>'+results.filename + ' is ' + results.fileSize + ' bytes</p>';
+        resultText += '<p>Mime type is ' + results.mimetype+'</p>' ;
+        resultText += '<p>Encoding is ' + results.encoding+'</p>';
+    }
+    var output = '	<div class="panel panel-default">' +
+        '<div class="panel-body">' +
+        resultText +
+        '</div>' +
         '</div>';
-    return output;
-}
-
-function parseRecentSearchResults(results) {
-    var output = "<table class=\"table table-striped\">" +
-        "<thead>" +
-        "<tr>" +
-        "<th>term</th>" +
-        "<th>when</th>" +
-        "</tr>" +
-        "</thead>" +
-        "<tbody>";
-    for (var i = 0; i < results.length; i++) {
-        output += "<tr>" +
-            "<td>" + results[i].term + "</td>" +
-            "<td>" + results[i].when + "</td>" +
-            "</tr>";
-    }
-    output += "</tbody>" +
-        "</table>";
     return output;
 }
